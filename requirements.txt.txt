@@ -1,4 +1,0 @@
-flask
-deepface
-opencv-python
-numpy
