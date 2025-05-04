@@ -3,8 +3,14 @@ from deepface import DeepFace
 import cv2
 import numpy as np
 import base64
+import os
 
 app = Flask(__name__)
+
+# ✅ تعريف المسار الجذري
+@app.route('/', methods=['GET'])
+def index():
+    return "Emotion Detection API is running", 200
 
 @app.route('/analyze', methods=['POST'])
 def analyze_emotion():
@@ -14,14 +20,11 @@ def analyze_emotion():
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
     result = DeepFace.analyze(img, actions=['emotion'], enforce_detection=False)
-    
-    # ✅ تحويل كل قيمة إلى float العادي
-    emotion_result = {k: float(v) for k, v in result[0]['emotion'].items()}
-    
-    return jsonify(emotion_result)
 
-import os
+    # ✅ تحويل النتائج إلى float
+    emotion_result = {k: float(v) for k, v in result[0]['emotion'].items()}
+
+    return jsonify(emotion_result)
 
 port = int(os.environ.get("PORT", 5000))
 app.run(host="0.0.0.0", port=port)
-
