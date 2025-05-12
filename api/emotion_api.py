@@ -6,7 +6,7 @@ import base64
 
 app = Flask(__name__)
 
-@app.route('/', methods=['"POST"'])
+@app.route('/', methods=['"GET"'])
 def home():
     return "🎉 API تعمل بنجاح! استخدم /analyze مع صورة مشفرة Base64."
 
