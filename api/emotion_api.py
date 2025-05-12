@@ -6,11 +6,11 @@ import base64
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['"POST"'])
 def home():
     return "🎉 API تعمل بنجاح! استخدم /analyze مع صورة مشفرة Base64."
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/', methods=['POST'])
 def analyze_emotion():
     data = request.json
     img_data = base64.b64decode(data['image'])
